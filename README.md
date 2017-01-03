@@ -1,6 +1,6 @@
 # 採購開竅資料挑戰賽
 
-此為利用[採購開竅資料挑戰賽](https://dsp.im/smart-contracting-data-challenge/)之政府電子採購網之決標資料進行相關分析。
+此為利用 [採購開竅資料挑戰賽](https://dsp.im/smart-contracting-data-challenge/) 之政府電子採購網之決標資料進行相關分析。
 製作中...
 ================
 ### 相關內容
