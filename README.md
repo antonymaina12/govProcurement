@@ -14,6 +14,7 @@
 1. 標案資訊樞紐分析
 ![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201543.png)
 ![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201608.png)
+
 2. 投標廠商相關資訊
 ![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201627.png)
 ![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201659.png)
