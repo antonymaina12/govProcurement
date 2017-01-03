@@ -53,8 +53,11 @@ shinyServer(function(input, output, session) {
   
   ## body of index
   output$body <- renderText({
-    paste0("<h2 style='font-family:微軟正黑體;'>此平台包含多項樞紐分析...</h2>",
-           "<span style='font-family:微軟正黑體;'>1. 決標金額分布<br />2. 決標金額分布圖<br />3. 採購金額級距<br />4. 預算高於決標倍數<br />5. 投標廠商數分布狀況<br />6. 完工時間分布<br />7. 實際標案連結</span>")
+    #paste0("<h2 style='font-family:微軟正黑體;'>此平台包含多項樞紐分析...</h2>",
+    #       "<span style='font-family:微軟正黑體;'>1. 決標金額分布<br />2. 決標金額分布圖<br />3. 採購金額級距<br />4. 預算高於決標倍數<br />5. 投標廠商數分布狀況<br />6. 完工時間分布<br />7. 實際標案連結</span>")
+    paste0('<p>此為利用<a href="https://dsp.im/smart-contracting-data-challenge/">採購開竅資料挑戰賽</a>之政府電子採購網之決標資料進行相關分析。</p>
+           <p>製作中...</p>
+           ')
   })
   
   ## Pivot
