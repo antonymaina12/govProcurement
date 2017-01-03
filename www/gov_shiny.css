@@ -1,0 +1,63 @@
+* {
+ font-family: 微軟正黑體;
+}
+.blocktitle{
+    box-shadow: 0px 1.5px 1.5px #888888;
+    background-color:#FCFCFC;
+    color:black;
+    font-size: 20px;
+    font-weight:bold;
+    padding:15px;
+    padding-bottom: 0px;
+}
+.block{
+    box-shadow: 0px 1.5px 1.5px #888888;
+    background-color:#FCFCFC;
+    color:black;
+    padding:20px;
+    margin-bottom:20px;
+    margin-top:25px;
+}
+.plotheader{
+	box-shadow: 0px 1.5px 1.5px #888888;
+    background-color:#FCFCFC;
+    color:black;
+    padding:20px;
+    margin-bottom:0px;
+    margin-top:25px;
+}
+.num {
+    font-size: 30px;
+    font-weight:bold;
+    text-decoration:underline;
+  }
+hr{
+    padding: 0px;
+    margin: 0px;    
+    size:2;
+    color:black;
+  }
+img{
+    box-shadow: 0px 1.5px 1.5px #888888;
+    background-color:#FCFCFC;
+}
+#view, #CompView, #ranking, #avgPP, #failReason{
+    box-shadow: 0px 1.5px 1.5px #888888;
+    background-color:#FCFCFC;
+    padding:20px;
+    margin-bottom:20px;
+    margin-top:0px;
+}
+.table{
+	width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    box-shadow: 0px 1.5px 1.5px #888888;
+    background-color:#FCFCFC;
+    padding:20px;
+    margin-bottom:20px;
+    margin-top:0px;
+}
+#avgPP .dataTables_length, #avgPP .dataTables_filter,#avgPP .dataTables_info, #avgPP .dataTables_paginate.paging_simple_numbers{
+	display:none;
+}
