@@ -317,15 +317,15 @@ shinyServer(function(input, output, session) {
   ## Company information
   if(TRUE){
     output$cmpTitle <- renderText({
-      paste0("<h3>投標相關公司</h3>
-             <span>　　點擊表格中公司名稱，下面即顯示該公司投標相關資訊。</span>
+      paste0("<h3>投標相關廠商</h3>
+             <span>　　點擊表格中廠商名稱，下面即顯示該廠商投標相關資訊。</span>
              <br><br><br>
              ")
     })
     
     output$rankheader <- renderText({
       paste0('<div class=plotheader>', 
-             "<span><font size='5'>標案相關公司得標率</font></span><HR><br>",
+             "<span><font size='5'>標案相關廠商得標率</font></span><HR><br>",
              '</div>')
     })
     # selection = 'single' 
