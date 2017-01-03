@@ -9,8 +9,8 @@ options(scipen=999)
 #dat$awards_suppliers_identifier_legalName <- readLines("awards_suppliers_identifier_legalName.txt", encoding="UTF-8")
 #dat <- dat %>% mutate_if(is.factor, as.character)
 
-compRank      <- readRDS("compRank.rds")#read.csv("得標廠商排行及與投標關係.csv", stringsAsFactors=F)
-compRank$name <- readLines("getAwards_name.txt", encoding="UTF-8")
+compRank      <- readRDS("files\\compRank.rds")#read.csv("得標廠商排行及與投標關係.csv", stringsAsFactors=F)
+compRank$name <- readLines("files\\getAwards_name.txt", encoding="UTF-8")
 
 
 

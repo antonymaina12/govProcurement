@@ -5,18 +5,18 @@ require(data.table)
 require(stringr)
 require(dplyr)
 
-dat <- readRDS("dat.rds")
-dat$tender_tenderers_identifier_legalName <- readLines("tender_tenderers_identifier_legalName.txt", encoding="UTF-8")
-dat$awards_suppliers_identifier_legalName <- readLines("awards_suppliers_identifier_legalName.txt", encoding="UTF-8")
-dat$awards_unsuccessfulTenderer_legalName <- readLines("awards_unsuccessfulTenderer_legalName.txt", encoding="UTF-8")
+dat <- readRDS("files\\dat.rds")
+dat$tender_tenderers_identifier_legalName <- readLines("files\\tender_tenderers_identifier_legalName.txt", encoding="UTF-8")
+dat$awards_suppliers_identifier_legalName <- readLines("files\\awards_suppliers_identifier_legalName.txt", encoding="UTF-8")
+dat$awards_unsuccessfulTenderer_legalName <- readLines("files\\awards_unsuccessfulTenderer_legalName.txt", encoding="UTF-8")
 dat <- dat %>% mutate_if(is.factor, as.character)
 
-compRank          <- readRDS("compRank.rds")
-compRank$廠商名稱 <- readLines("getAwards_name.txt", encoding="UTF-8")
+compRank          <- readRDS("files\\compRank.rds")
+compRank$廠商名稱 <- readLines("files\\getAwards_name.txt", encoding="UTF-8")
 compRank          <- compRank %>% mutate_if(is.factor, as.character)
 
-failReason          <- readRDS("failReason.rds")
-failReason$廠商名稱 <- readLines("failReason.txt", encoding="UTF-8")
+failReason          <- readRDS("files\\failReason.rds")
+failReason$廠商名稱 <- readLines("files\\failReason.txt", encoding="UTF-8")
 
 datlenCheck <- function(bclass, sclass, location, amountRange){
   if(sclass != "不選擇"){
