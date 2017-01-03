@@ -10,4 +10,11 @@
 3. 其他相關觀察結果（如跟景氣、廠商平均投標數、平均預算適切度...）如[附件]()。
 
 ### 系統畫面
+
+1. 標案資訊樞紐分析
 ![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201543.png)
+![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201608.png)
+2. 投標廠商相關資訊
+![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201627.png)
+![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201659.png)
+![alt tag](https://github.com/r3dmaohong/govProcurement/blob/master/img/2017-01-03_201710.png)

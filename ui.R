@@ -75,7 +75,7 @@ fluidPage(
                         ))
              ),
              ##
-             tabPanel("投標公司相關資訊",
+             tabPanel("投標廠商相關資訊",
                       htmlOutput("cmpTitle"),
                       htmlOutput("rankheader"),
                       dataTableOutput("ranking"),
