@@ -58,6 +58,6 @@ img{
     margin-bottom:20px;
     margin-top:0px;
 }
-#avgPP .dataTables_length, #avgPP .dataTables_filter,#avgPP .dataTables_info, #avgPP .dataTables_paginate.paging_simple_numbers{
+#failReason .dataTables_filter, #failReason .dataTables_length, #failReason .dataTables_info, #failReason .dataTables_paginate.paging_simple_numbers, #avgPP .dataTables_length, #avgPP .dataTables_filter,#avgPP .dataTables_info, #avgPP .dataTables_paginate.paging_simple_numbers{
 	display:none;
 }
