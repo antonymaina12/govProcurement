@@ -106,16 +106,15 @@ shinyServer(function(input, output, session) {
                           "</span> 筆資料")
       }
       paste0('<div class=block>', 
-             "<span><font size='5'>供給需求比率</font></span><HR><br>",
+             "<span><font size='5'>需供比</font></span><HR><br>",
              "　<span class='num'>", 
-             (s_element / d_element * 100) %>% round(., 2), 
-             "</span> %（供需比）",
-             " = ",
-             s_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
-             "（供給數）",
-             " / ", 
+             paste0("1 : ", round(s_element / d_element, 2)), 
+             "</span>",
+             " （需求數 : 供給數 = ",
              d_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
-             "（需求數）",
+             " : ", 
+             s_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
+             "）",
              '</div>')
     })
     
