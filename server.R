@@ -448,8 +448,10 @@ shinyServer(function(input, output, session) {
     output$failReason <-  renderDataTable({
       s <- input$ranking_rows_selected
       if(length(s)){
-        tmp <- failReason[grepl(gsub("\\", "", compRank$廠商名稱[input$ranking_rows_selected], fixed=T), failReason$廠商名稱),]
-        tmp <- tmp[,c("失敗原因", "筆數")]
+        #grepl(paste0(gsub("\\", "", compRank$廠商名稱[input$ranking_rows_selected], fixed=T), "@"), dat$awards_suppliers_identifier_legalName %>% paste0("@"))
+        tmp <- failReason[failReason$廠商名稱 == compRank$廠商名稱[input$ranking_rows_selected],]
+        tmp <- tmp[,c("失敗原因", "百分比")]
+        
         rownames(tmp) <- NULL
         datatable(tmp, options = list(bSort=FALSE))
       }
