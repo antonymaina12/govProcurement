@@ -2,6 +2,7 @@
 
 此為利用 [採購開竅資料挑戰賽](https://dsp.im/smart-contracting-data-challenge/) 之政府電子採購網之決標資料進行相關分析。
 製作中...
+DEMO網址：[連結](https://r3dmaohong.shinyapps.io/govProcurement/)
 ================
 ### 相關內容
 
