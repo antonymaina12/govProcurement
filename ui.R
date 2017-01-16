@@ -97,12 +97,6 @@ fluidPage(
                       htmlOutput("CompViewheader"),
                       dataTableOutput("CompView")
                       )
-##hide
-#http://127.0.0.1:5372/#tab-4386-3
-#tabPanel(title = "1",
-#         value = "tab1",
-#)
-#eval(parse(text=paste0("tabPanel(title = '", 1:3, "', value = 'tab", 1:3, "', fluidPage(htmlOutput('tabtitle", 1:3, "')))", collapse = ", ")))
 
 ##End
 ))
