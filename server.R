@@ -62,7 +62,6 @@ shinyServer(function(input, output, session) {
   
   ## Pivot
   if(TRUE){
-    
     output$title <- renderText({
       smallClassification <- getsClass(input$classification, input$smallclassification_1, input$smallclassification_2, input$smallclassification_3)
       if(smallClassification == "不選擇")

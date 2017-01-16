@@ -21,6 +21,9 @@ fluidPage(
   navbarPage("政府採購資料",
              ##
              tabPanel("介紹",
+                      conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                                       #htmlOutput("loadmessage", class = "test")),
+                                       tags$div("歡迎", id="loadmessage")),
                       htmlOutput("body")
              ),
              ##
@@ -29,6 +32,9 @@ fluidPage(
                         ##title
                         headerPanel("標案資訊"),
                         sidebarPanel(
+                          conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                                           #htmlOutput("loadmessage", class = "test")),
+                                           tags$div("讀取資料中，請稍候...", id="loadmessage")),
                           selectInput(inputId = "classification", 
                                       label = "選擇標案分類：", 
                                       choices = c("工程類" = "工程類", "勞務類" = "勞務類", "財物類" = "財物類")),

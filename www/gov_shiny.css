@@ -61,3 +61,18 @@ img{
 #failReason .dataTables_filter, #failReason .dataTables_length, #failReason .dataTables_info, #failReason .dataTables_paginate.paging_simple_numbers, #avgPP .dataTables_length, #avgPP .dataTables_filter,#avgPP .dataTables_info, #avgPP .dataTables_paginate.paging_simple_numbers{
 	display:none;
 }
+ #loadmessage {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 5px 0px 5px 0px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+    z-index: 105000;
+    background: rgba(200,200,200,0.6);
+    line-height: 100%;
+}
