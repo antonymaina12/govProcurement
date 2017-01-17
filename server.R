@@ -94,7 +94,7 @@ shinyServer(function(input, output, session) {
       
       if(smallClassification != "不選擇"){
         s_element <- sum(dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)], na.rm = T)
-        d_element <- length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique)
+        d_element <- length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique)
       }else{
         s_element <- sum(dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)], na.rm = T)
         d_element <- length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique)
