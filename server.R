@@ -93,7 +93,7 @@ shinyServer(function(input, output, session) {
       smallClassification <- getsClass(input$classification, input$smallclassification_1, input$smallclassification_2, input$smallclassification_3)
       
       if(smallClassification != "不選擇"){
-        s_element <- sum(dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)], na.rm = T)
+        s_element <- sum(dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)], na.rm = T)
         d_element <- length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique)
       }else{
         s_element <- sum(dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)], na.rm = T)
@@ -104,17 +104,22 @@ shinyServer(function(input, output, session) {
                           length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique) %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
                           "</span> 筆資料")
       }
-      paste0('<div class=block>', 
-             "<span><font size='5'>需供比</font></span><HR><br>",
-             "　<span class='num'>", 
-             paste0("1 : ", round(s_element / d_element, 2)), 
-             "</span>",
-             " （需求數 : 供給數 = ",
-             d_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
-             " : ", 
-             s_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
-             "）",
-             '</div>')
+      if(datlenCheck(input$classification, smallClassification, input$location, input$amountRange) != 0){
+        paste0('<div class=block>', 
+               "<span><font size='5'>需供比</font></span><HR><br>",
+               "　<span class='num'>", 
+               paste0("1 : ", round(s_element / d_element, 2)), 
+               "</span>",
+               " （需求數 : 供給數 = ",
+               d_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
+               " : ", 
+               s_element %>% round(., 0) %>% format(., nsmall = 0, big.mark=","), 
+               "）",
+               '</div>')
+      }else{
+        paste0("")
+      }
+      
     })
     
     ## 決標金額
@@ -157,23 +162,25 @@ shinyServer(function(input, output, session) {
     output$distPlot <- renderPlot({
       smallClassification <- getsClass(input$classification, input$smallclassification_1, input$smallclassification_2, input$smallclassification_3)
       
-      if(smallClassification != "不選擇"){
-        datlen <- length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique)
-        value <- dat$awardsValue[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)]
-        element <- hist(value[!value %in% boxplot.stats(value)$out], breaks = 100, 
-                        main = paste0(input$location, smallClassification, "\nValue Amount"),
-                        xlab = "Value amount", col = "lightblue")
+      if(datlenCheck(input$classification, smallClassification, input$location, input$amountRange) != 0){
+        if(smallClassification != "不選擇"){
+          datlen <- length(dat$url[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)] %>% unique)
+          value <- dat$awardsValue[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)]
+          element <- hist(value[!value %in% boxplot.stats(value)$out], breaks = 100, 
+                          main = paste0(input$location, smallClassification, "\nValue Amount"),
+                          xlab = "Value amount", col = "lightblue")
+        }else{
+          datlen <- length(dat$awardsValue[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)])
+          value <- dat$awardsValue[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)]
+          element <- hist(value[!value %in% boxplot.stats(value)$out], breaks = 100,
+                          main = "",#paste0(input$location, "\nValue Amount"),
+                          xlab = "決標金額", col = "lightblue")
+        }
+        return(element)
       }else{
-        datlen <- length(dat$awardsValue[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)])
-        value <- dat$awardsValue[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)]
-        element <- hist(value[!value %in% boxplot.stats(value)$out], breaks = 100,
-                        main = "",#paste0(input$location, "\nValue Amount"),
-                        xlab = "決標金額", col = "lightblue")
+        return("")
       }
-      shiny::validate(
-        need(datlenCheck(input$classification, smallClassification, input$location, input$amountRange) != 0, "查無資料")
-      )
-      element
+      
     })
     
     output$valuePercentage <- renderText({
@@ -206,54 +213,56 @@ shinyServer(function(input, output, session) {
     })
     output$numberOfBidsPlot <- renderPlot({
       smallClassification <- getsClass(input$classification, input$smallclassification_1, input$smallclassification_2, input$smallclassification_3)
-      
-      if(smallClassification != "不選擇"){
-        value <- dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)]
-        value <- table(value) %>% as.data.frame(., stringsAsFactors=F)
-        value <- value[order(-value$Freq), ]
-        
-        names(value)[1] <- "投標廠商數"
-        ##ggplot2 bar chart
-        value <- eval(parse(text=
-                              paste0("within(value, ", names(value)[1], 
-                                     " <- factor(", names(value)[1], 
-                                     ", levels=rev(value[,1])))")
-        ))
-        element <- eval(parse(text=paste0(
-          "ggplot(data=value, aes(x=", names(value)[1], ", y=Freq)) +
+      if(datlenCheck(input$classification, smallClassification, input$location, input$amountRange) != 0){
+        if(smallClassification != "不選擇"){
+          value <- dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tender_classification_description==smallClassification & dat$tender_procurementAmountRange==input$amountRange)]
+          value <- table(value) %>% as.data.frame(., stringsAsFactors=F)
+          value <- value[order(-value$Freq), ]
+          
+          names(value)[1] <- "投標廠商數"
+          ##ggplot2 bar chart
+          value <- eval(parse(text=
+                                paste0("within(value, ", names(value)[1], 
+                                       " <- factor(", names(value)[1], 
+                                       ", levels=rev(value[,1])))")
+          ))
+          element <- eval(parse(text=paste0(
+            "ggplot(data=value, aes(x=", names(value)[1], ", y=Freq)) +
+            geom_bar(stat='identity', fill = '#FF6666') + xlab('", names(value)[1], "') + theme_classic() + 
+            theme(axis.text = element_text(size=14)) +
+            geom_text(aes(x=", names(value)[1], ", y=Freq, label=Freq, 
+            hjust=1), 
+            position = position_dodge(width=1)) + 
+            coord_flip()" # + ggtitle('Distribution of Tenderers')+ theme(plot.title = element_text(size=18))
+          )))
+          
+        }else{
+          value <- dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)]
+          value <- table(value) %>% as.data.frame(., stringsAsFactors=F)
+          value <- value[order(-value$Freq), ]
+          
+          names(value)[1] <- "投標廠商數"
+          ##ggplot2 bar chart
+          value <- eval(parse(text=
+                                paste0("within(value, ", names(value)[1], 
+                                       " <- factor(", names(value)[1], 
+                                       ", levels=rev(value[,1])))")
+          ))
+          element <- eval(parse(text=paste0(
+            "ggplot(data=value, aes(x=", names(value)[1], ", y=Freq)) +
           geom_bar(stat='identity', fill = '#FF6666') + xlab('", names(value)[1], "') + theme_classic() + 
           theme(axis.text = element_text(size=14)) +
           geom_text(aes(x=", names(value)[1], ", y=Freq, label=Freq, 
           hjust=1), 
           position = position_dodge(width=1)) + 
           coord_flip()" # + ggtitle('Distribution of Tenderers')+ theme(plot.title = element_text(size=18))
-        )))
+          )))
+        }
+        return(element)
       }else{
-        value <- dat$tender_numberOfBids[which(grepl(input$location, dat$SimpleLocation) & dat$tcd.simp==input$classification & dat$tender_procurementAmountRange==input$amountRange)]
-        value <- table(value) %>% as.data.frame(., stringsAsFactors=F)
-        value <- value[order(-value$Freq), ]
-        
-        names(value)[1] <- "投標廠商數"
-        ##ggplot2 bar chart
-        value <- eval(parse(text=
-                              paste0("within(value, ", names(value)[1], 
-                                     " <- factor(", names(value)[1], 
-                                     ", levels=rev(value[,1])))")
-        ))
-        element <- eval(parse(text=paste0(
-          "ggplot(data=value, aes(x=", names(value)[1], ", y=Freq)) +
-          geom_bar(stat='identity', fill = '#FF6666') + xlab('", names(value)[1], "') + theme_classic() + 
-          theme(axis.text = element_text(size=14)) +
-          geom_text(aes(x=", names(value)[1], ", y=Freq, label=Freq, 
-          hjust=1), 
-          position = position_dodge(width=1)) + 
-          coord_flip()" # + ggtitle('Distribution of Tenderers')+ theme(plot.title = element_text(size=18))
-        )))
+        return("")
       }
-      shiny::validate(
-        need(datlenCheck(input$classification, smallClassification, input$location, input$amountRange) != 0, "查無資料")
-      )
-      element
+      
       })
     
     output$contractPeriodSummary <- renderText({
